@@ -1,0 +1,30 @@
+TASK 07 — PREDICTIONS WRITTEN BEFORE IMPLEMENTATION EXECUTION
+
+1. Functional Equivalence Prediction (transaction_validation.cpp)
+- Workload A (12 values: 100, 200, 300, ..., 1200; CAPACITY = 10):
+  Both OriginalShiftingHistory and RedesignedCircularHistory will discard 100 and 200
+  and print the exact last 10 values in chronological order:
+  300 400 500 600 700 800 900 1000 1100 1200
+
+- Workload B (SavingsAccount SA1001, opening 100000, Q4's 12 valid + 3 invalid inputs):
+  Both OriginalSavingsAccount and RedesignedSavingsAccount will reject invalid operations,
+  reach balance 117000 paise, and retain the exact same 10 latest transactions:
+  +1500 +3000 -1200 +2500 -800 +4000 -1500 +1000 -500 +6000
+
+- Boundary check (0, 1, 9, 10, 11, 25 insertions):
+  Snapshots of both versions will match element-for-element at every count.
+
+2. Performance Prediction (transaction_benchmark.cpp)
+- Measure: Elapsed time (milliseconds) across 100,000, 1,000,000, and 5,000,000 additions
+  with identical input streams and verified identical final snapshots.
+- Expected complexity:
+  - Original shifting array: O(k) per insertion after buffer fills (shifts k - 1 = 9 items).
+  - Circular buffer: O(1) per insertion (direct write + start/count index update).
+- Expected measured behaviour:
+  - At -O0 (unoptimized): Circular buffer should be noticeably faster than shifting array
+    across all three counts (100k, 1M, 5M) because the inner 9-iteration loop is skipped.
+  - At -O2 (optimized): For small k = 10, the compiler may unroll or vectorize the 9-element
+    shift in registers/L1 cache, so the speedup ratio may narrow compared to -O0, whereas
+    for larger k = 50 the O(k) vs O(1) separation should remain much clearer.
+  - Both versions should scale approximately linearly with N (5M taking roughly 5x 1M and
+    50x 100k).

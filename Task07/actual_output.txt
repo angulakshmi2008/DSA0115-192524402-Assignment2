@@ -1,0 +1,23 @@
+ACTUAL PROGRAM OUTPUTS — TASK 07
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic (0 errors, 0 warnings)
+
+1. transaction_validation.cpp
+=== 1. 12-Transaction Sequence (100..1200, Capacity 10) ===
+Original Shifting  : 300 400 500 600 700 800 900 1000 1100 1200
+Redesigned Circular: 300 400 500 600 700 800 900 1000 1100 1200
+Identical output   : PASS
+
+=== 2. SavingsAccount Sequence (Same Inputs as Task 04) ===
+Original Account   (SA1001, Balance=117000): 1500 3000 -1200 2500 -800 4000 -1500 1000 -500 6000
+Redesigned Account (SA1001, Balance=117000): 1500 3000 -1200 2500 -800 4000 -1500 1000 -500 6000
+Account equivalence: PASS
+
+=== 3. Boundary Fill-Level Checks (0, 1, 9, 10, 11, 25 items) ===
+  n=0 -> MATCH
+  n=1 -> MATCH
+  n=9 -> MATCH
+  n=10 -> MATCH
+  n=11 -> MATCH
+  n=25 -> MATCH
+Overall validation : ALL PASS

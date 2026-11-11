@@ -1,0 +1,12 @@
+EXPECTED OUTPUT — TASK 07
+
+1. transaction_validation.cpp:
+- Sequence 100..1200: Original and Circular both output 300 400 500 600 700 800 900 1000 1100 1200.
+- Banking sequence SA1001: Original and Circular both reach balance 117000 and retain
+  +1500 +3000 -1200 +2500 -800 +4000 -1500 +1000 -500 +6000.
+- Boundary sequence (0, 1, 9, 10, 11, 25 insertions): All snapshots match 100%.
+
+2. transaction_benchmark.cpp:
+- Both Original and Circular produce identical final 10-item snapshots (verified by
+  programmatic equality check and matching checksum) for 100,000, 1,000,000, and
+  5,000,000 insertions.

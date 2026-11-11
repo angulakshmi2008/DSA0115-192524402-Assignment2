@@ -1,0 +1,101 @@
+BENCHMARK RESULTS — TASK 07 (ORIGINAL SHIFTING ARRAY VS REDESIGNED CIRCULAR BUFFER)
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Workloads: 100,000, 1,000,000, and 5,000,000 insertions; 3 trials per workload.
+Snapshot equivalence verified via matching checksums after every single trial.
+
+================================================================================
+BUILD 1: g++ -std=c++17 -O0 -Wall -Wextra -pedantic Task07/transaction_benchmark.cpp -o Task07/benchmark_O0.exe
+================================================================================
+=== Primary Redesign Comparison (CAPACITY = 10, 3 trials each) ===
+
+Workload: 100000 insertions
+  Trial 1 -> Shifting:    2.068 ms | Circular:    0.841 ms | Checksum: 5499890
+  Trial 2 -> Shifting:    2.083 ms | Circular:    0.615 ms | Checksum: 5499890
+  Trial 3 -> Shifting:    1.997 ms | Circular:    0.613 ms | Checksum: 5499890
+
+Workload: 1000000 insertions
+  Trial 1 -> Shifting:   22.958 ms | Circular:    9.579 ms | Checksum: 54999890
+  Trial 2 -> Shifting:   20.526 ms | Circular:    7.035 ms | Checksum: 54999890
+  Trial 3 -> Shifting:   21.313 ms | Circular:    6.393 ms | Checksum: 54999890
+
+Workload: 5000000 insertions
+  Trial 1 -> Shifting:  102.826 ms | Circular:   45.592 ms | Checksum: 274999890
+  Trial 2 -> Shifting:  107.467 ms | Circular:   37.358 ms | Checksum: 274999890
+  Trial 3 -> Shifting:   98.575 ms | Circular:   40.020 ms | Checksum: 274999890
+
+=== Expanded Requirement Comparison (CAPACITY = 50, 3 trials each) ===
+
+Workload: 100000 insertions
+  Trial 1 -> Shifting:    8.176 ms | Circular:    0.611 ms | Checksum: 127480450
+  Trial 2 -> Shifting:    9.619 ms | Circular:    0.876 ms | Checksum: 127480450
+  Trial 3 -> Shifting:    8.511 ms | Circular:    0.611 ms | Checksum: 127480450
+
+Workload: 1000000 insertions
+  Trial 1 -> Shifting:   91.537 ms | Circular:    6.471 ms | Checksum: 1274980450
+  Trial 2 -> Shifting:   91.362 ms | Circular:    6.628 ms | Checksum: 1274980450
+  Trial 3 -> Shifting:   93.031 ms | Circular:   11.588 ms | Checksum: 1274980450
+
+Workload: 5000000 insertions
+  Trial 1 -> Shifting:  464.217 ms | Circular:   34.250 ms | Checksum: 6374980450
+  Trial 2 -> Shifting:  463.813 ms | Circular:   33.969 ms | Checksum: 6374980450
+  Trial 3 -> Shifting:  504.098 ms | Circular:   44.280 ms | Checksum: 6374980450
+
+================================================================================
+BUILD 2: g++ -std=c++17 -O2 -Wall -Wextra -pedantic Task07/transaction_benchmark.cpp -o Task07/benchmark_O2.exe
+================================================================================
+=== Primary Redesign Comparison (CAPACITY = 10, 3 trials each) ===
+
+Workload: 100000 insertions
+  Trial 1 -> Shifting:    0.968 ms | Circular:    0.526 ms | Checksum: 5499890
+  Trial 2 -> Shifting:    0.972 ms | Circular:    0.528 ms | Checksum: 5499890
+  Trial 3 -> Shifting:    0.981 ms | Circular:    0.530 ms | Checksum: 5499890
+
+Workload: 1000000 insertions
+  Trial 1 -> Shifting:   11.015 ms | Circular:    5.335 ms | Checksum: 54999890
+  Trial 2 -> Shifting:   10.835 ms | Circular:    5.468 ms | Checksum: 54999890
+  Trial 3 -> Shifting:   10.423 ms | Circular:    5.275 ms | Checksum: 54999890
+
+Workload: 5000000 insertions
+  Trial 1 -> Shifting:   52.924 ms | Circular:   26.702 ms | Checksum: 274999890
+  Trial 2 -> Shifting:   53.231 ms | Circular:   27.314 ms | Checksum: 274999890
+  Trial 3 -> Shifting:   54.756 ms | Circular:   27.242 ms | Checksum: 274999890
+
+=== Expanded Requirement Comparison (CAPACITY = 50, 3 trials each) ===
+
+Workload: 100000 insertions
+  Trial 1 -> Shifting:    1.597 ms | Circular:    0.485 ms | Checksum: 127480450
+  Trial 2 -> Shifting:    1.631 ms | Circular:    0.485 ms | Checksum: 127480450
+  Trial 3 -> Shifting:    1.685 ms | Circular:    0.488 ms | Checksum: 127480450
+
+Workload: 1000000 insertions
+  Trial 1 -> Shifting:   17.423 ms | Circular:    4.919 ms | Checksum: 1274980450
+  Trial 2 -> Shifting:   16.581 ms | Circular:    4.871 ms | Checksum: 1274980450
+  Trial 3 -> Shifting:   17.391 ms | Circular:    4.966 ms | Checksum: 1274980450
+
+Workload: 5000000 insertions
+  Trial 1 -> Shifting:   88.165 ms | Circular:   26.629 ms | Checksum: 6374980450
+  Trial 2 -> Shifting:   88.300 ms | Circular:   25.320 ms | Checksum: 6374980450
+  Trial 3 -> Shifting:   88.471 ms | Circular:   25.068 ms | Checksum: 6374980450
+
+================================================================================
+MEDIAN SUMMARY TABLE
+================================================================================
+Capacity = 10 (-O2):
+  100,000   additions: Shifting  0.972 ms vs Circular  0.528 ms (1.84x faster)
+  1,000,000 additions: Shifting 10.835 ms vs Circular  5.335 ms (2.03x faster)
+  5,000,000 additions: Shifting 53.231 ms vs Circular 27.242 ms (1.95x faster)
+
+Capacity = 50 (-O2):
+  100,000   additions: Shifting  1.631 ms vs Circular  0.485 ms (3.36x faster)
+  1,000,000 additions: Shifting 17.391 ms vs Circular  4.919 ms (3.54x faster)
+  5,000,000 additions: Shifting 88.300 ms vs Circular 25.320 ms (3.49x faster)
+
+Capacity = 10 (-O0):
+  100,000   additions: Shifting   2.068 ms vs Circular  0.615 ms (3.36x faster)
+  1,000,000 additions: Shifting  21.313 ms vs Circular  7.035 ms (3.03x faster)
+  5,000,000 additions: Shifting 102.826 ms vs Circular 40.020 ms (2.57x faster)
+
+Capacity = 50 (-O0):
+  100,000   additions: Shifting   8.511 ms vs Circular  0.611 ms (13.93x faster)
+  1,000,000 additions: Shifting  91.537 ms vs Circular  6.628 ms (13.81x faster)
+  5,000,000 additions: Shifting 464.217 ms vs Circular 34.250 ms (13.55x faster)
