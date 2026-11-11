@@ -1,0 +1,35 @@
+TASK 05 — PREDICTIONS WRITTEN BEFORE COMPILATION AND EXECUTION
+
+1. Token Program (token_predict.cpp)
+Exact predicted output:
+101 103 104 4
+
+Step-by-step manual trace:
+- Token::next is initialized once to 100 by the out-of-class definition.
+- Token counter[3]; invokes the default constructor Token() three times:
+  - counter[0].id = ++next -> 101
+  - counter[1].id = ++next -> 102
+  - counter[2].id = ++next -> 103
+- Token extra; invokes Token() a fourth time:
+  - extra.id = ++next -> 104
+- Constructor executions total: 4.
+- counter[0].get() = 101
+- counter[2].get() = 103
+- extra.get() = 104
+- Token::issued() = next - 100 = 104 - 100 = 4.
+- Counter starts at 100 so issued token IDs begin at 101 (human-readable 3-digit token numbers) while subtracting 100 yields the exact count of issued tokens (0 initially, 4 after 4 constructions).
+
+2. Complete the Code — BusTicket (complete_bus_ticket.cpp)
+Expected output:
+Asha: Seat 1
+Bala: Seat 2
+Chitra: Seat 3
+Dev: Waiting
+Issued: 3
+
+3. Tickets Inside a Function Called Twice (bus_ticket_function_demo.cpp, CAPACITY = 3)
+- Call 1 (2 passengers: Asha, Bala):
+  Asha -> Seat 1, Bala -> Seat 2, BusTicket::count() = 2.
+  Automatic array goes out of scope when function returns, destroying objects.
+- Call 2 (2 passengers: Chitra, Dev):
+  Static counter persists at 2: Chitra -> Seat 3, Dev -> Waiting, BusTicket::count() = 3.

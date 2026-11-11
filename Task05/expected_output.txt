@@ -1,0 +1,11 @@
+EXPECTED OUTPUT — TASK 05
+
+1. token_predict.cpp:
+101 103 104 4
+
+2. complete_bus_ticket.cpp (from PDF page 11):
+Asha: Seat 1
+Bala: Seat 2
+Chitra: Seat 3
+Dev: Waiting
+Issued: 3

@@ -1,0 +1,50 @@
+ACTUAL PROGRAM OUTPUTS — TASK 05
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic (0 errors, 0 warnings)
+
+1. token_predict.cpp
+101 103 104 4
+
+2. complete_bus_ticket.cpp
+Asha: Seat 1
+Bala: Seat 2
+Chitra: Seat 3
+Dev: Waiting
+Issued: 3
+
+3. bus_ticket_function_demo.cpp
+Initial count before any call: 0
+
+--- Call 1 ---
+  Asha: Seat 1
+  Bala: Seat 2
+  Issued after Call 1: 2
+
+--- Call 2 ---
+  Chitra: Seat 3
+  Dev: Waiting
+  Issued after Call 2: 3
+
+Total seats issued (queried via class): 3
+
+4. bus_ticket_alternatives.cpp
+=== Alternative 1: Global Counter ===
+  Asha: Seat 1
+  Bala: Seat 2
+  Chitra: Seat 3
+  Dev: Waiting
+  Global issued count: 3
+
+=== Alternative 2: TicketOffice for Two Independent Buses ===
+[BUS-101 | Capacity 3]
+  Asha: Seat 1
+  Bala: Seat 2
+  Chitra: Seat 3
+  Dev: Waiting
+  Issued on BUS-101: 3
+
+[BUS-202 | Capacity 2]
+  Esha: Seat 1
+  Farhan: Seat 2
+  Gita: Waiting
+  Issued on BUS-202: 2
