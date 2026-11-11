@@ -1,0 +1,48 @@
+TASK 03 — OVERLOAD SELECTION PREDICTIONS (WRITTEN BEFORE EXECUTION)
+
+Illustrative rates assumed (not official courier tariffs):
+- Base weight rate: Rs. 40.00 per kg (int weights are in grams, converted via weightGrams / 1000.0)
+- Express surcharge: Rs. 30.00
+- Insurance surcharge: Rs. 20.00
+
+Six Core Calls — Predicted Overload Selection and Returned Charge:
+
+1. charge(2)
+   - Argument type: int (2)
+   - Selected overload: charge(int weightGrams, bool express = false, bool insured = false)
+   - Rule: Exact match on 1st parameter (int); remaining 2 parameters use right-to-left defaults (false, false).
+   - Predicted charge: (2 / 1000.0) * 40.0 = 0.08
+
+2. charge(2.0f)
+   - Argument type: float (2.0f)
+   - Selected overload: charge(double weightKg, bool express = false, bool insured = false)
+   - Rule: float -> double is a floating-point Promotion (Rank 2), which beats float -> int Standard Conversion (Rank 3). Remaining 2 parameters use defaults (false, false).
+   - Predicted charge: 2.0 * 40.0 = 80.00
+
+3. charge(500)
+   - Argument type: int (500)
+   - Selected overload: charge(int weightGrams, bool express = false, bool insured = false)
+   - Rule: Exact match on int; defaults (false, false).
+   - Predicted charge: (500 / 1000.0) * 40.0 = 20.00
+
+4. charge(2, true)
+   - Argument types: int (2), bool (true)
+   - Selected overload: charge(int weightGrams, bool express = false, bool insured = false)
+   - Rule: Exact match for both int and bool; 3rd parameter uses default (insured = false).
+   - Predicted charge: (2 / 1000.0) * 40.0 + 30.0 = 30.08
+
+5. charge(2.0, false, true)
+   - Argument types: double (2.0), bool (false), bool (true)
+   - Selected overload: charge(double weightKg, bool express = false, bool insured = false)
+   - Rule: Exact match for all three parameters.
+   - Predicted charge: 2.0 * 40.0 + 20.0 = 100.00
+
+6. charge(box)  [where Parcel box{2.5, true, false}]
+   - Argument type: Parcel
+   - Selected overload: charge(const Parcel& parcel)
+   - Rule: Exact match binding lvalue Parcel to const Parcel&.
+   - Predicted charge: 2.5 * 40.0 + 30.0 = 130.00
+
+Additional Boundary Check Predictions:
+- short s = 750; charge(s): Integral promotion (short -> int, Rank 2) beats short -> double (floating-integral conversion, Rank 3), selecting charge(int, bool, bool) -> 30.00.
+- charge(0) / charge(-100): Returns 0.00 (invalid negative weight rejected safely).

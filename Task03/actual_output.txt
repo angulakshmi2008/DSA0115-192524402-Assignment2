@@ -1,0 +1,35 @@
+ACTUAL PROGRAM OUTPUTS — TASK 03
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. courier_overloads.cpp
+Note: Illustrative courier rates (Rs. 40/kg, +30 express, +20 insured).
+
+=== Six Designed Overload Calls ===
+  [Selected: charge(int, bool, bool)]    1. charge(2)                -> Rs. 0.08
+  [Selected: charge(double, bool, bool)] 2. charge(2.0f)             -> Rs. 80.00
+  [Selected: charge(int, bool, bool)]    3. charge(500)              -> Rs. 20.00
+  [Selected: charge(int, bool, bool)]    4. charge(2, true)          -> Rs. 30.08
+  [Selected: charge(double, bool, bool)] 5. charge(2.0, false, true) -> Rs. 100.00
+  [Selected: charge(const Parcel&)]      6. charge(box)              -> Rs. 130.00
+
+=== Additional Promotion & Boundary Cases ===
+  [Selected: charge(int, bool, bool)]    short(750) promoted to int  -> Rs. 30.00
+  [Selected: charge(double, bool, bool)] charge(2.0) exact double    -> Rs. 80.00
+  [Selected: charge(-5.0) invalid        -> Rs. 0.00
+  [Selected: charge(0) zero weight       -> Rs. 0.00
+
+2. courier_alternative.cpp
+=== Alternative 1: Single ParcelOptions Struct ===
+Standard (2.0 kg)                 : Rs. 80.00
+Express + Insured + Fragile (2.5) : Rs. 165.00
+
+=== Alternative 2: Function Template ===
+chargeTemplate(500) [int grams]   : Rs. 20.00
+chargeTemplate(2.0f, true) [float]: Rs. 110.00
+chargeTemplate(2.0, false, true)  : Rs. 100.00
+
+=== Parameter Copy Cost Comparison ===
+sizeof(double)               : 8 bytes
+sizeof(ParcelOptions)        : 16 bytes
+sizeof(const ParcelOptions*) : 8 bytes (const ref binding)

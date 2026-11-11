@@ -1,0 +1,38 @@
+COMPILER DIAGNOSTICS — TASK 03
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. ambiguous_original.cpp (intentional reproduction of broken PDF overload set):
+   Command: g++ -std=c++17 -Wall -Wextra -pedantic -c Task03\ambiguous_original.cpp -o Task03\ambiguous_original.o
+
+   Task03\ambiguous_original.cpp: In function 'int main()':
+   Task03\ambiguous_original.cpp:17:22: error: call of overloaded 'charge(double)' is ambiguous
+      17 |     double a = charge(2.0);
+         |                ~~~~~~^~~~~
+     • there are 2 candidates
+       • candidate 1: 'double charge(double)'
+         Task03\ambiguous_original.cpp:4:8:
+             4 | double charge(double weight) {
+               |        ^~~~~~
+       • candidate 2: 'double charge(double, bool, bool)'
+         Task03\ambiguous_original.cpp:12:8:
+            12 | double charge(double weight, bool express = false, bool insured = false) {
+               |        ^~~~~~
+   Task03\ambiguous_original.cpp:18:22: error: call of overloaded 'charge(double, bool)' is ambiguous
+      18 |     double b = charge(2.0, true);
+         |                ~~~~~~^~~~~~~~~~~
+     • there are 2 candidates
+       • candidate 1: 'double charge(double, bool)'
+         Task03\ambiguous_original.cpp:8:8:
+             8 | double charge(double weight, bool express) {
+               |        ^~~~~~
+       • candidate 2: 'double charge(double, bool, bool)'
+         Task03\ambiguous_original.cpp:12:8:
+            12 | double charge(double weight, bool express = false, bool insured = false) {
+               |        ^~~~~~
+
+2. courier_overloads.cpp:
+   0 errors, 0 warnings.
+
+3. courier_alternative.cpp:
+   0 errors, 0 warnings.

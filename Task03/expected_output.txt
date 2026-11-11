@@ -1,0 +1,14 @@
+EXPECTED OUTPUT — TASK 03
+
+1. ambiguous_original.cpp:
+   Expected compiler error: call of overloaded 'charge(double)' and 'charge(double, bool)' is ambiguous.
+
+2. courier_overloads.cpp:
+   Call 1 charge(2)               -> charge(int, bool, bool)    : Rs. 0.08
+   Call 2 charge(2.0f)            -> charge(double, bool, bool) : Rs. 80.00
+   Call 3 charge(500)             -> charge(int, bool, bool)    : Rs. 20.00
+   Call 4 charge(2, true)         -> charge(int, bool, bool)    : Rs. 30.08
+   Call 5 charge(2.0, false, true)-> charge(double, bool, bool) : Rs. 100.00
+   Call 6 charge(box)             -> charge(const Parcel&)      : Rs. 130.00
+   Extra short s = 750; charge(s) -> charge(int, bool, bool)    : Rs. 30.00
+   Extra charge(-5.0)             -> charge(double, bool, bool) : Rs. 0.00 (invalid weight)
