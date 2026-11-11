@@ -1,0 +1,21 @@
+COMPILER DIAGNOSTICS — TASK 01
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. concession_methods.cpp:
+   0 errors, 0 warnings.
+
+2. predict_output.cpp:
+   predict_output.cpp: In function 'void change(int, int&, int*)':
+   predict_output.cpp:3:17: warning: parameter 'a' set but not used [-Wunused-but-set-parameter]
+       3 | void change(int a, int& b, int* c)
+         |             ~~~~^
+   Explanation: Expected warning from -Wextra because 'a' is passed by value, updated locally
+   (a += 10), and never read afterwards, directly illustrating why call by value loses local edits.
+   Original PDF code was preserved untouched as required.
+
+3. complete_todo1.cpp:
+   0 errors, 0 warnings.
+
+4. concession_alternative.cpp:
+   0 errors, 0 warnings.

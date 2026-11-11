@@ -1,0 +1,16 @@
+# Compiled binaries and object files
+*.exe
+*.o
+*.obj
+*.out
+*.pdb
+*.ilk
+
+# Temporary and IDE files
+.vscode/
+.vs/
+*.tmp
+*.log
+*.swp
+*~
+__pycache__/

@@ -1,0 +1,62 @@
+TASK 01 — PREDICTIONS WRITTEN BEFORE COMPILATION AND EXECUTION
+
+1. Concession Methods Program (concession_methods.cpp)
+Initial fee per test case: 45000
+
+Case A: Merit Concession (10%)
+- applyByValue(45000, 10):
+  Inside function: 40500
+  Stored fee in caller: 45000 (unchanged, local copy modified)
+- applyByReference(45000, 10):
+  Stored fee in caller: 40500 (modified via reference alias)
+- applyByPointer(&fee, 10):
+  Stored fee in caller: 40500 (modified via pointer dereference)
+
+Case B: Sports Concession (15%)
+- applyByValue(45000, 15):
+  Inside function: 38250
+  Stored fee in caller: 45000
+- applyByReference(45000, 15):
+  Stored fee in caller: 38250
+- applyByPointer(&fee, 15):
+  Stored fee in caller: 38250
+
+Case C: Single Parent Concession (25%)
+- applyByValue(45000, 25):
+  Inside function: 33750
+  Stored fee in caller: 45000
+- applyByReference(45000, 25):
+  Stored fee in caller: 33750
+- applyByPointer(&fee, 25):
+  Stored fee in caller: 33750
+
+Case D: Pointer nullptr check & Sequential Concessions (45000 -> Merit 10% -> Sports 15%)
+- applyByPointer(nullptr, 10): safely ignored without dereferencing null.
+- After Merit 10%: 40500
+- After Sports 15% on 40500: 40500 - (40500 * 15 / 100) = 40500 - 6075 = 34425
+
+------------------------------------------------------------
+
+2. Predict the Output Program (predict_output.cpp)
+Exact predicted output:
+1 12 13
+1 100
+16 13 6 
+
+Step-by-step manual trace:
+- Initial values: a = 1, b = 2, c = 3.
+- change(a, b, &c):
+  - 'a' is passed by value -> local copy becomes 11; caller 'a' remains 1.
+  - 'b' is passed by reference -> caller 'b' becomes 2 + 10 = 12.
+  - '&c' is passed as int* -> *c becomes 3 + 10 = 13; caller 'c' becomes 13.
+  Line 1 output: "1 12 13"
+- bigger(a, c) = 100:
+  - p binds to a (1), q binds to c (13).
+  - p > q (1 > 13) is false, so bigger returns q (int& alias to c).
+  - Assigning 100 modifies c to 100; a stays 1.
+  Line 2 output: "1 100"
+  (Note: Independently verified against the prepared Word draft, which had a typo "100 13" in its output line while correctly stating a = 1 and c = 100 in its explanation.)
+- show(1): x = 1, defaults y = 5, z = 10 -> prints "16 "
+- show(1, 2): x = 1, y = 2, default z = 10 -> prints "13 "
+- show(1, 2, 3): x = 1, y = 2, z = 3 -> prints "6 "
+  Line 3 output: "16 13 6 " (followed by newline)

@@ -1,0 +1,16 @@
+EXPECTED OUTPUT — TASK 01
+
+1. Complete the Code (complete_todo1.cpp) — from PDF page 4–5:
+after call by value  : 45000
+after call by reference: 40500
+
+2. Predict the Output (predict_output.cpp) — manually verified:
+1 12 13
+1 100
+16 13 6 
+
+3. Concession Methods (concession_methods.cpp) — expected stored fees:
+- Merit (10%) on 45000: value=45000 (inside=40500), reference=40500, pointer=40500
+- Sports (15%) on 45000: value=45000 (inside=38250), reference=38250, pointer=38250
+- Single Parent (25%) on 45000: value=45000 (inside=33750), reference=33750, pointer=33750
+- Sequential Merit (10%) + Sports (15%) on 45000: 45000 -> 40500 -> 34425

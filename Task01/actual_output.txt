@@ -1,0 +1,59 @@
+ACTUAL PROGRAM OUTPUTS — TASK 01
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. concession_methods.cpp
+=== Merit Concession (10% on 45000) ===
+  [Inside applyByValue] Revised local copy: 40500
+  Stored fee after call by value    : 45000
+  Stored fee after call by reference: 40500
+  Stored fee after call by pointer  : 40500
+
+=== Sports Concession (15% on 45000) ===
+  [Inside applyByValue] Revised local copy: 38250
+  Stored fee after call by value    : 45000
+  Stored fee after call by reference: 38250
+  Stored fee after call by pointer  : 38250
+
+=== Single Parent Concession (25% on 45000) ===
+  [Inside applyByValue] Revised local copy: 33750
+  Stored fee after call by value    : 45000
+  Stored fee after call by reference: 33750
+  Stored fee after call by pointer  : 33750
+
+=== Edge Cases ===
+  [Pointer] Null pointer passed; safely skipped.
+  Stored fee after 0% concession    : 45000
+  [Reference] Invalid fee or percentage.
+  Stored fee after invalid 120%     : 45000
+
+=== Sequential Concessions (Merit 10% then Sports 15%) ===
+  Initial hostel fee                : 45000
+  After Merit 10%                   : 40500
+  After Sports 15%                  : 34425
+
+2. predict_output.cpp
+1 12 13
+1 100
+16 13 6 
+
+3. complete_todo1.cpp
+after call by value  : 45000
+after call by reference: 40500
+
+4. concession_alternative.cpp
+=== Alternative: Return New Fee ===
+  Original baseFee        : 45000
+  After Merit (10%)       : 40500
+  After +Sports (15%)     : 34425
+  After +SingleParent(25%): 25819
+
+=== Parameter Size Comparison ===
+  sizeof(long long)   : 8 bytes
+  sizeof(Student)     : 168 bytes
+  sizeof(Student*)    : 8 bytes (pointer/ref representation)
+
+=== Passing Student Object ===
+  [By value] Student: ANGULAKSHMI S., RegNo: 192524402, Fee: 45000
+  [By const ref] Student: ANGULAKSHMI S., RegNo: 192524402, Fee: 45000
+  After 25% by Student&   : 33750
