@@ -1,0 +1,14 @@
+EXPECTED OUTPUT — TASK 04
+
+1. savings_account.cpp (reading transactions_input.txt):
+- Opening account SA1001 with 100000 paise.
+- Invalid inputs (D 0, W -100, W 500000) are rejected without altering balance or history.
+- After 10 valid transactions: balance 111500 paise, 10 transactions stored (+5000 down to +1000).
+- On 11th valid transaction (W 500): oldest +5000 is discarded, balance becomes 111000 paise.
+- On 12th valid transaction (D 6000): oldest -2000 is discarded, balance becomes 117000 paise.
+- Final mini-statement contains the latest 10 transactions:
+  +1500, +3000, -1200, +2500, -800, +4000, -1500, +1000, -500, +6000.
+
+2. history_alternatives.cpp:
+- Shifting array, circular buffer, and std::deque all produce the exact same
+  final 10 transactions in chronological order (+1500 through +6000).

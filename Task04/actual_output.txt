@@ -1,0 +1,73 @@
+ACTUAL PROGRAM OUTPUTS — TASK 04
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic (0 errors, 0 warnings)
+
+1. savings_account.cpp (with transactions_input.txt)
+=== Initial State ===
+Account: SA1001 | Stored transactions: 0 | Balance (paise): 100000
+  (No transactions recorded)
+
+=== Processing Transactions ===
+Valid #1 Deposit  +5000 -> Balance: 105000
+Valid #2 Withdraw -2000 -> Balance: 103000
+Valid #3 Deposit  +1500 -> Balance: 104500
+Rejected Deposit   0 (invalid amount)
+Rejected Withdraw  -100 (invalid or insufficient funds)
+Rejected Withdraw  500000 (invalid or insufficient funds)
+Valid #4 Deposit  +3000 -> Balance: 107500
+Valid #5 Withdraw -1200 -> Balance: 106300
+Valid #6 Deposit  +2500 -> Balance: 108800
+Valid #7 Withdraw -800 -> Balance: 108000
+Valid #8 Deposit  +4000 -> Balance: 112000
+Valid #9 Withdraw -1500 -> Balance: 110500
+Valid #10 Deposit  +1000 -> Balance: 111500
+
+--- Mini-Statement after valid transaction #10 ---
+Account: SA1001 | Stored transactions: 10 | Balance (paise): 111500
+  [1] +5000
+  [2] -2000
+  [3] +1500
+  [4] +3000
+  [5] -1200
+  [6] +2500
+  [7] -800
+  [8] +4000
+  [9] -1500
+  [10] +1000
+
+Valid #11 Withdraw -500 -> Balance: 111000
+
+--- Mini-Statement after valid transaction #11 ---
+Account: SA1001 | Stored transactions: 10 | Balance (paise): 111000
+  [1] -2000
+  [2] +1500
+  [3] +3000
+  [4] -1200
+  [5] +2500
+  [6] -800
+  [7] +4000
+  [8] -1500
+  [9] +1000
+  [10] -500
+
+Valid #12 Deposit  +6000 -> Balance: 117000
+
+--- Mini-Statement after valid transaction #12 ---
+Account: SA1001 | Stored transactions: 10 | Balance (paise): 117000
+  [1] +1500
+  [2] +3000
+  [3] -1200
+  [4] +2500
+  [5] -800
+  [6] +4000
+  [7] -1500
+  [8] +1000
+  [9] -500
+  [10] +6000
+
+2. history_alternatives.cpp
+=== Comparison After 12 Transactions (Capacity 10) ===
+1. Shifting Fixed Array: [+1500, +3000, -1200, +2500, -800, +4000, -1500, +1000, -500, +6000]
+2. Circular Fixed Array: [+1500, +3000, -1200, +2500, -800, +4000, -1500, +1000, -500, +6000]
+3. std::deque History  : [+1500, +3000, -1200, +2500, -800, +4000, -1500, +1000, -500, +6000]
+All three outputs identical: YES
