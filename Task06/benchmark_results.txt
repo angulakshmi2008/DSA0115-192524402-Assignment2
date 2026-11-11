@@ -1,0 +1,52 @@
+BENCHMARK RESULTS — TASK 06 (10,000,000 CALL PAIRS)
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Workload: 10,000,000 iterations calling (diff + earlier) over 64 Time objects; 3 trials per build.
+Verified identical checksum across all variants and builds: checksum = 2424062500
+
+Build 1: g++ -std=c++17 -O0 -Wall -Wextra -pedantic Task06/inline_benchmark.cpp Task06/time_outofline.cpp -o Task06/benchmark_O0.exe
+--- Run 1 ---
+  1. Separate-TU (no inline)      :    251.919 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :    285.793 ms (checksum=2424062500)
+  3. Inline friend functions      :    254.578 ms (checksum=2424062500)
+  4. Inline member functions      :    442.038 ms (checksum=2424062500)
+  5. Inline getter functions      :    382.686 ms (checksum=2424062500)
+
+--- Run 2 ---
+  1. Separate-TU (no inline)      :    250.730 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :    307.630 ms (checksum=2424062500)
+  3. Inline friend functions      :    267.903 ms (checksum=2424062500)
+  4. Inline member functions      :    429.183 ms (checksum=2424062500)
+  5. Inline getter functions      :    398.395 ms (checksum=2424062500)
+
+--- Run 3 ---
+  1. Separate-TU (no inline)      :    319.807 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :    405.465 ms (checksum=2424062500)
+  3. Inline friend functions      :    496.030 ms (checksum=2424062500)
+  4. Inline member functions      :    401.890 ms (checksum=2424062500)
+  5. Inline getter functions      :    483.361 ms (checksum=2424062500)
+
+Build 2: g++ -std=c++17 -O2 -Wall -Wextra -pedantic Task06/inline_benchmark.cpp Task06/time_outofline.cpp -o Task06/benchmark_O2.exe
+--- Run 1 ---
+  1. Separate-TU (no inline)      :     44.649 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :     29.321 ms (checksum=2424062500)
+  3. Inline friend functions      :     30.023 ms (checksum=2424062500)
+  4. Inline member functions      :     29.812 ms (checksum=2424062500)
+  5. Inline getter functions      :     35.304 ms (checksum=2424062500)
+
+--- Run 2 ---
+  1. Separate-TU (no inline)      :     49.365 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :     40.885 ms (checksum=2424062500)
+  3. Inline friend functions      :     34.328 ms (checksum=2424062500)
+  4. Inline member functions      :     36.134 ms (checksum=2424062500)
+  5. Inline getter functions      :     38.620 ms (checksum=2424062500)
+
+--- Run 3 ---
+  1. Separate-TU (no inline)      :     64.150 ms (checksum=2424062500)
+  2. Same-TU (no inline keyword)  :     43.195 ms (checksum=2424062500)
+  3. Inline friend functions      :     35.940 ms (checksum=2424062500)
+  4. Inline member functions      :     31.566 ms (checksum=2424062500)
+  5. Inline getter functions      :     34.451 ms (checksum=2424062500)
+
+Median Summary across 3 runs:
+-O0: Separate-TU 251.919 ms | Same-TU 307.630 ms | Inline friend 267.903 ms | Inline member 429.183 ms | Inline getter 398.395 ms
+-O2: Separate-TU  49.365 ms | Same-TU  40.885 ms | Inline friend  34.328 ms | Inline member  31.566 ms | Inline getter  35.304 ms

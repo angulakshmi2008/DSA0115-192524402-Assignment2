@@ -1,0 +1,15 @@
+EXPECTED OUTPUT — TASK 06
+
+1. complete_time.cpp (from PDF page 13):
+205 false
+
+2. time_tests.cpp:
+- Time(9, 45) vs Time(13, 10): minutesBetween = 205, earlier(13:10, 09:45) = false, earlier(09:45, 13:10) = true
+- Same time twice Time(10, 30) vs Time(10, 30): minutesBetween = 0, earlier = false
+- Either side of noon Time(11, 50) vs Time(12, 10): minutesBetween = 20, earlier = true
+- Later departure Time(14, 15) vs earlier arrival Time(13, 45): minutesBetween = 30, earlier(14:15, 13:45) = false
+- Boundary times Time(0, 0) vs Time(23, 59): minutesBetween = 1439, earlier = true
+- Boundary validation check: out-of-range Time(25, 70) rejected/clamped safely in ValidatedTime.
+
+3. time_alternatives.cpp:
+- Friend functions, member functions, and public getters all produce identical outputs on every test pair.

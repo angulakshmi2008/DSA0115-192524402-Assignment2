@@ -1,0 +1,26 @@
+ACTUAL PROGRAM OUTPUTS — TASK 06
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic (0 errors, 0 warnings)
+
+1. complete_time.cpp
+205 false
+
+2. time_tests.cpp
+=== Time Correctness Tests ===
+PDF sample        (09:45 vs 13:10): minutesBetween=205, earlier(a,b)=true, earlier(b,a)=false
+Same time twice   (10:30 vs 10:30): minutesBetween=0, earlier(a,b)=false, earlier(b,a)=false
+Across noon       (11:50 vs 12:10): minutesBetween=20, earlier(a,b)=true, earlier(b,a)=false
+Later dep/early   (14:15 vs 13:45): minutesBetween=30, earlier(a,b)=false, earlier(b,a)=true
+Day boundaries    (00:00 vs 23:59): minutesBetween=1439, earlier(a,b)=true, earlier(b,a)=false
+
+=== Hour/Minute Boundary Validation ===
+00:00 valid : true
+23:59 valid : true
+24:00 valid : false
+12:60 valid : false
+-1:15 valid : false
+
+3. time_alternatives.cpp
+Friend design : minutesBetween=205, earlier(13:10, 09:45)=false
+Member design : minutesTo     =205, isEarlier(13:10, 09:45)=false
+Getters design: minutesBetween=205, earlier(13:10, 09:45)=false
