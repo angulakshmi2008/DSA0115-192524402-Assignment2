@@ -1,0 +1,47 @@
+ACTUAL PROGRAM OUTPUTS — TASK 02
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. highest_mark_ref.cpp
+=== 1. Direct Moderation (+2) via Return by Reference ===
+Initial marks: [78, 91, 84, 88, 86]
+Highest before moderation: 91
+Highest after +2         : 93
+Marks after +2: [78, 93, 84, 88, 86]
+
+=== 2. Function Call on Left of '=' ===
+Before direct assignment: [72, 96, 85, 91]
+After highestMark(...)=100: [72, 100, 85, 91]
+
+=== 3. Reference vs Const Reference vs Copy ===
+const int& readHighestMark : 93
+Modified local int copy    : 98
+Actual marks[1] unchanged  : 93
+
+=== 4. std::vector Reallocation Invalidates References ===
+Before push_back: size=3, capacity=3, &highest=0x1a4357fe364, value=91
+After growth    : size=4, capacity=6, new &highest=0x1a4357fe284
+Address changed (old reference invalidated): YES
+
+2. dangling_reference_demo.cpp
+unsafeReference() is compiled only to demonstrate the compiler warning.
+Its returned reference is NOT dereferenced because doing so is undefined behaviour.
+
+3. highest_mark_alternatives.cpp
+=== 1. Alternative: Return Index ===
+Highest index: 1, value: 91
+After +2     : 93
+
+=== 2. Alternative: Return Pointer ===
+Highest via pointer: 91
+After +2           : 93
+
+=== 3. Edge Cases ===
+Tie first highest index : 1 (value 95)
+Single element updated  : 66
+Empty array index       : -1
+Empty array pointer     : nullptr
+
+=== 4. Index Stability After Vector Reallocation ===
+Capacity grew from 3 to 6
+Element at saved index 1 after reallocation: 92

@@ -1,0 +1,22 @@
+COMPILER DIAGNOSTICS — TASK 02
+Compiler: g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r3) 16.2.0
+Flags: -std=c++17 -Wall -Wextra -pedantic
+
+1. highest_mark_ref.cpp:
+   0 errors, 0 warnings.
+
+2. dangling_reference_demo.cpp:
+   Task02\dangling_reference_demo.cpp: In function 'int& unsafeReference()':
+   Task02\dangling_reference_demo.cpp:7:12: warning: reference to local variable 'localValue' returned [-Wreturn-local-addr]
+       7 |     return localValue; // Dangling reference: localValue lifetime ends on return
+         |            ^~~~~~~~~~
+   Task02\dangling_reference_demo.cpp:6:9: note: declared here
+       6 |     int localValue = 50;
+         |         ^~~~~~~~~~
+
+   Explanation: Intentional diagnostic demonstrating why returning a reference to an
+   automatic (stack-allocated) local variable is flagged by the compiler. The local
+   variable is destroyed on function exit, leaving the returned reference dangling.
+
+3. highest_mark_alternatives.cpp:
+   0 errors, 0 warnings.

@@ -1,0 +1,17 @@
+EXPECTED OUTPUT — TASK 02
+
+1. highest_mark_ref.cpp:
+- Highest mark 91 becomes 93 after highestMark(marks, size) += 2.
+- Second array [72, 96, 85, 91] becomes [72, 100, 85, 91] via highestMark(examMarks, examSize) = 100.
+- const int& reflects 93; modifying local int copy (93 -> 98) leaves marks[1] at 93.
+- std::vector reallocation changes buffer capacity and moves &highest to a new memory address.
+
+2. dangling_reference_demo.cpp:
+- Compiler emits -Wreturn-local-addr warning on int& unsafeReference().
+- Executable runs safely without calling or dereferencing unsafeReference().
+
+3. highest_mark_alternatives.cpp:
+- Index alternative updates marksA[1] from 91 to 93.
+- Pointer alternative updates *ptr from 91 to 93.
+- Edge cases: tie selects first highest index 1 (value 95); single element updates 64 -> 66; empty returns -1 / nullptr.
+- Saved vector index 1 remains valid after vector capacity grows.
